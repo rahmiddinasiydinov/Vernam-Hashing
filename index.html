@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .vernam__title {
+            text-align: center;
+            font-size: 30px;
+            font-weight: 900;
+            font-family: sans-serif;
+        }
+        
+        .vernam__wrapper {
+            width: 1000px;
+            max-width: 100%;
+            margin: 50px auto;
+        }
+        
+        .vernam__form {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+        }
+        
+        .vernam__input {
+            padding: 10px 15px;
+            width: 50%;
+            outline: none;
+            border: 2px solid #000;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+            border-right: none;
+        }
+        
+        .vernam__input-key {
+            padding: 10px 15px;
+            width: 30%;
+            -webkit-transform: translateX(-20px);
+            transform: translateX(-20px);
+            outline: none;
+            border: 2px solid #000;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+            border-right: none;
+        }
+        
+        .vernam__output {
+            margin-top: 50px;
+            font-size: 20px;
+        }
+        
+        .submit {
+            width: 20%;
+            outline: none;
+            border: 2px solid #000;
+            background-color: #000;
+            color: #fff;
+            border-radius: 20px;
+            -webkit-transform: translateX(-40px);
+            transform: translateX(-40px);
+        }
+        /*# sourceMappingURL=style.css.map */
+    </style>
+</head>
+<body>
+    <h1 class="vernam__title">Vernam Method</h1>
+    <div class="vernam__wrapper">
+        <form action="" class="vernam__form">
+            <input type="text" class="vernam__input" placeholder="Data...">
+            <input type="text" class="vernam__input-key" placeholder="key...">
+            <button class="submit">Hashing!</button>
+        </form>
+        <p class="vernam__output">Output: <span class="output"></span></p>
+    </div>
+    <script>
+        function Vernam(str, key){
+            //values
+            str = str.toUpperCase().split('');
+            key = key.toUpperCase().split('');
+            //output;
+            let output=[];
+            let length = key.length;
+            let codes = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '#', '!', '_', '@', '?',' '];
+            for(let i in str){
+                let a = codes.findIndex(e=>e===str[i])
+                let b = codes.findIndex(e=>e===key[i%length])
+                output.push(codes[a^b])
+            }
+            return output.join('')
+        }
+        let openText = document.querySelector('.vernam__input');
+        let keyText = document.querySelector('.vernam__input-key');
+        let outputText = document.querySelector('.output');
+        let form = document.querySelector('.vernam__form');
+        
+        form.addEventListener('submit', e=>{
+            e.preventDefault();
+            let val = openText.value;
+            let key = keyText.value;
+            let output = Vernam(val, key);
+            console.log()
+            outputText.textContent = output;
+        })
+        
+    </script>
+</body>
+</html>
