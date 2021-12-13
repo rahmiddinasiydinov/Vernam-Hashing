@@ -51,6 +51,17 @@
             margin-top: 50px;
             font-size: 20px;
         }
+        .change{
+            width: 100px;
+            display: block;
+            border: none;
+            background-color: #00FF00;
+            color: #fff;
+            font-weight: 900;
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin: auto;
+        }
         
         .submit {
             width: 20%;
@@ -66,7 +77,8 @@
     </style>
 </head>
 <body>
-    <h1 class="vernam__title">Vernam Method</h1>
+    <h1 class="vernam__title">Vernam Method (Cyphering)</h1>
+    <button class="change">Decypher</button>
     <div class="vernam__wrapper">
         <form action="" class="vernam__form">
             <input type="text" class="vernam__input" placeholder="Data...">
@@ -95,7 +107,18 @@
         let keyText = document.querySelector('.vernam__input-key');
         let outputText = document.querySelector('.output');
         let form = document.querySelector('.vernam__form');
+        let changeButton = document.querySelector('.change');
+        let title = document.querySelector('.vernam__title')
+        let isTrue = true;
+        changeButton.addEventListener('click', change)
+        function change() {
+            isTrue =!isTrue;
+            isTrue?changeButton.textContent = 'Decypher':changeButton.textContent = 'Cypher';
+            isTrue?changeButton.style.backgroundColor='#00FF00':changeButton.style.backgroundColor='#000957'
+            isTrue? title.textContent='Vernam Method (Cyphering)':title.textContent='Vernam Method (Decyphering)'
+        }
         
+
         form.addEventListener('submit', e=>{
             e.preventDefault();
             let val = openText.value;
